@@ -45,6 +45,7 @@ public class SunburnActivity extends AppCompatActivity {
 
         //set the starting time
         time=readTime();
+        millis = readTime()*1000;
 
         Boolean gameInterrupted=sharedPref.getBoolean(getString(R.string.interruption_key),false);
         if(gameInterrupted){
