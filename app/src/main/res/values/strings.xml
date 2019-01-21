@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">Crashathon</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="feature_lock">com.example.user.crashathontemplateapp.FEATURE_LOCK_PREF</string>
+    <string name="crash1_lock">crash1_lock</string>
+    <string name="crash2_lock">crash2_lock</string>
+    <string name="logo_lock">logo_lock</string>
+    <string name="camera_lock">camera_lock</string>
+    <string name="menu_item_lock">menu_item_lock</string>
+    <string name="score_text_lock">score_text_lock</string>
+    <string name="login_text">Please enter your details</string>
+    <string name="name_prompt">Enter your name</string>
+    <string name="enter_password">Enter password</string>
+    <string name="timer_text_key">timer_text_key</string>
+    <string name="log_in_key">log_in_key</string>
+    <string name="game_over_key">game_over_key</string>
+    <string name="interruption_key">interruption_key</string>
+    <string name="system_time">system_time</string>
+    <string name="exit_game_dialog_message">Do you really want to exit the game?</string>
+    <string name="exit_game_yes_button">Yes</string>
+    <string name="exit_game_no_button">No</string>
+</resources>

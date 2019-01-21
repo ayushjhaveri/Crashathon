@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SunburnActivity">
+
+    <me.itangqi.waveloadingview.WaveLoadingView
+        android:layout_centerHorizontal="true"
+        android:id="@+id/wlv_sunburn"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        app:wlv_borderColor="@color/colorAccent"
+        app:wlv_borderWidth="3dp"
+        app:wlv_progressValue="40"
+        app:wlv_shapeType="circle"
+        app:wlv_round_rectangle="true"
+        app:wlv_triangle_direction="north"
+        app:wlv_titleCenterStrokeColor="@android:color/holo_blue_dark"
+        app:wlv_titleCenterStrokeWidth="3dp"
+        app:wlv_titleCenter="0 : 00"
+        app:wlv_titleCenterColor="@android:color/white"
+        app:wlv_titleCenterSize="12sp"
+        app:wlv_titleBottom="Bugs:0/8 Score:0"
+        app:wlv_titleBottomSize="8sp"
+        app:wlv_titleBottomColor="@android:color/white"
+        app:wlv_waveAmplitude="70"
+        app:wlv_waveColor="@color/colorAccent"/>
+
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/drum"
+        android:layout_alignParentEnd="true"
+        />
+
+    <TextView
+        android:layout_below="@id/wlv_sunburn"
+        android:id="@+id/tv_title"
+        android:layout_width="match_parent"
+        android:gravity="center"
+        android:text="The Sunburn'19 Concert"
+        android:textSize="30sp"
+        android:textColor="@android:color/black"
+        android:layout_height="50dp"
+        android:padding="8dp"/>
+
+    <TextView
+        android:id="@+id/tv_sub"
+        android:layout_below="@id/tv_title"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:text="Shake it, Flash it, Turn it up, Play the beat!"
+        android:textSize="18sp"
+        android:padding="6dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginEnd="12dp"
+        android:gravity="center"/>
+
+
+
+</RelativeLayout>
