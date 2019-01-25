@@ -1,13 +1,21 @@
 package com.example.ayush.crashathon;
 
+import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.CountDownTimer;
 import android.os.Environment;
+import android.support.design.widget.Snackbar;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.DatePicker;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import java.io.BufferedReader;
@@ -24,6 +32,9 @@ import java.util.Calendar;
 
 import me.itangqi.waveloadingview.WaveLoadingView;
 
+import static com.example.ayush.crashathon.Utils.readScore;
+import static com.example.ayush.crashathon.Utils.updateScore;
+
 public class SunburnActivity extends AppCompatActivity {
 
     int count=0;
@@ -32,6 +43,10 @@ public class SunburnActivity extends AppCompatActivity {
     SharedPreferences sharedPref;
     static CountDownTimer countDownTimer;
     WaveLoadingView wlv;
+    Button showExplicitButton;
+    Calendar mCalendar = Calendar.getInstance();
+    ImageView explicitImage;
+    Boolean isImageBlurred = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +54,8 @@ public class SunburnActivity extends AppCompatActivity {
         setContentView(R.layout.activity_sunburn);
 
         wlv = (WaveLoadingView) findViewById(R.id.wlv_sunburn);
+        explicitImage = (ImageView) findViewById(R.id.explicit_image);
+        showExplicitButton = (Button) findViewById(R.id.show_explicit_button);
 
         //Get a handle to a sharedpref object
         sharedPref=this.getPreferences(Context.MODE_PRIVATE);
@@ -64,6 +81,63 @@ public class SunburnActivity extends AppCompatActivity {
             startActivity(intent);
         }
 
+
+        showExplicitButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(final View v) {
+                showExplicitButton.setVisibility(View.GONE);
+                DatePickerDialog datePickerDialog = new DatePickerDialog(SunburnActivity.this, new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker datePicker, int year, int monthOfYear, int dayOfMonth) {
+                        mCalendar.set(Calendar.YEAR, year);
+                        mCalendar.set(Calendar.MONTH, monthOfYear);
+                        mCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                        if (year > 2001) {
+                            //We begin by checking if the feature has been locked previously
+                            sharedPref=SunburnActivity.this.getPreferences(Context.MODE_PRIVATE);
+                            Boolean isLocked=sharedPref.getBoolean(getString(R.string.underage_bug_lock),false);
+                            if(isLocked){
+                                Snackbar.make(v, "You've already used this feature", Snackbar.LENGTH_LONG)
+                                        .setAction("Action", null).show();
+                            }else{
+                                //First, lock the feature so that it can't be used more than once
+                                SharedPreferences.Editor editor=sharedPref.edit();
+                                editor.putBoolean(getString(R.string.underage_bug_lock), true);
+                                editor.apply();
+                                //Then, we crash the app
+                                crash();
+                                explicitImage.setVisibility(View.GONE);
+                            }
+                        } else {
+                            isImageBlurred = false;
+                            explicitImage.setImageResource(R.drawable.rohit);
+                        }
+                    }
+                }, mCalendar.get(Calendar.YEAR), mCalendar.get(Calendar.MONTH), mCalendar.get(Calendar.DAY_OF_MONTH));
+                datePickerDialog.show();
+            }
+        });
+
+        explicitImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (isImageBlurred) {
+                    return;
+                } else {
+                    Intent intent = new Intent(view.getContext(), FullScreenImage.class);
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                        ActivityOptionsCompat options = ActivityOptionsCompat.
+                                makeSceneTransitionAnimation(SunburnActivity.this, (View) explicitImage, getString(R.string.product_transition));
+                        startActivity(intent, options.toBundle());
+                    } else {
+                        startActivity(intent);
+                    }
+                }
+            }
+        });
+
+
+
         //fetching the score from the local file
         String scoreString="";
         File file = new File(this.getExternalFilesDir(null), "ScoreData");
@@ -81,9 +155,9 @@ public class SunburnActivity extends AppCompatActivity {
         }
 
         if(scoreString.isEmpty()){
-            updateScore(count);
+            updateScore(count, this);
         }else{
-            count=readScore();
+            count=readScore(this);
         }
 
         countDownTimer=new CountDownTimer(time*1000, 1000) {
@@ -108,96 +182,9 @@ public class SunburnActivity extends AppCompatActivity {
 
     }
 
-    public boolean updateScore(int count){
-        // check if available and not read only
-        if (!isExternalStorageAvailable() || isExternalStorageReadOnly()) {
-            Log.w("FileUtils", "Storage not available or read only");
-            return false;
-        }
-
-        // Create a path where we will place our List of objects on external storage
-        File file = new File(this.getExternalFilesDir(null), "ScoreData");
-        PrintStream p = null; // declare a print stream object
-        boolean success = false;
-
-        try {
-            OutputStream os = new FileOutputStream(file);
-            // Connect print stream to the output stream
-            p = new PrintStream(os);
-            p.println(""+count);
-            Log.w("FileUtils", "Writing file" + file);
-            success = true;
-        } catch (IOException e) {
-            Log.w("FileUtils", "Error writing " + file, e);
-        } catch (Exception e) {
-            Log.w("FileUtils", "Failed to save file", e);
-        } finally {
-            try {
-                if (null != p)
-                    p.close();
-            } catch (Exception ex) {
-            }
-        }
-        return success;
-    }
-
-    public int readScore(){
-
-        int score=0;
-
-        if (!isExternalStorageAvailable() || isExternalStorageReadOnly())
-        {
-            Log.w("FileUtils", "Storage not available or read only");
-            return 13;
-        }
-
-        FileInputStream fis = null;
-
-        try
-        {
-            File file = new File(this.getExternalFilesDir(null), "ScoreData");
-            fis = new FileInputStream(file);
-            // Get the object of DataInputStream
-            DataInputStream in = new DataInputStream(fis);
-            BufferedReader br = new BufferedReader(new InputStreamReader(in));
-            String strLine;
-            //Read File Line By Line
-            while ((strLine = br.readLine()) != null) {
-                Log.w("FileUtils", "File data: " + strLine);
-                score=Integer.parseInt(""+strLine);
-            }
-            in.close();
-        }
-        catch (Exception ex) {
-            Log.e("FileUtils", "failed to load file", ex);
-        }
-        finally {
-            try {if (null != fis) fis.close();} catch (IOException ex) {}
-        }
-
-        return score;
-
-    }
-
-    private static boolean isExternalStorageReadOnly() {
-        String extStorageState = Environment.getExternalStorageState();
-        if (Environment.MEDIA_MOUNTED_READ_ONLY.equals(extStorageState)) {
-            return true;
-        }
-        return false;
-    }
-
-    private static boolean isExternalStorageAvailable() {
-        String extStorageState = Environment.getExternalStorageState();
-        if (Environment.MEDIA_MOUNTED.equals(extStorageState)) {
-            return true;
-        }
-        return false;
-    }
-
     public void crash(){
         count++;
-        updateScore(count);
+        updateScore(count, this);
         writeTime();
         Toast.makeText(this, "Crash!!!", Toast.LENGTH_SHORT).show();
     }

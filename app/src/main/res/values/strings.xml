@@ -5,10 +5,10 @@
     <string name="title_notifications">Notifications</string>
 
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="feature_lock">com.example.user.crashathontemplateapp.FEATURE_LOCK_PREF</string>
-    <string name="crash1_lock">crash1_lock</string>
-    <string name="crash2_lock">crash2_lock</string>
-    <string name="logo_lock">logo_lock</string>
+    <string name="underage_bug_lock">underage_bug_lock</string>
+    <string name="product_transition" translatable="false">productTransition</string>
+    <string name="zoom_bug_lock">zoom_bug_lock</string>
+    <string name="landscape_bug_lock">landscape_bug_lock</string>
     <string name="camera_lock">camera_lock</string>
     <string name="menu_item_lock">menu_item_lock</string>
     <string name="score_text_lock">score_text_lock</string>
