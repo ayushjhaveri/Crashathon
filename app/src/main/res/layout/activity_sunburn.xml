@@ -29,6 +29,7 @@
         app:wlv_waveColor="@color/colorAccent"/>
 
     <ImageView
+        android:id="@+id/drum_buttons"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:src="@drawable/drum"
@@ -71,6 +72,22 @@
         android:layout_height="wrap_content"
         android:text="Explicit!"
         android:layout_centerInParent="true" />
+
+    <Switch
+        android:text="Dark Theme"
+        android:id="@+id/switch_dark"
+        android:layout_alignParentBottom="true"
+        android:layout_width="200dp"
+        android:layout_height="100dp" />
+
+    <Switch
+
+        android:text="Light Theme"
+        android:id="@+id/switch_light"
+        android:layout_toRightOf="@id/switch_dark"
+        android:layout_alignParentBottom="true"
+        android:layout_width="200dp"
+        android:layout_height="100dp" />
 
 
 

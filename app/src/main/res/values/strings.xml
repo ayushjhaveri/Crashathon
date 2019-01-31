@@ -10,8 +10,9 @@
     <string name="zoom_bug_lock">zoom_bug_lock</string>
     <string name="landscape_bug_lock">landscape_bug_lock</string>
     <string name="camera_lock">camera_lock</string>
-    <string name="menu_item_lock">menu_item_lock</string>
-    <string name="score_text_lock">score_text_lock</string>
+    <string name="drum_button_lock">drum_button_lock</string>
+    <string name="shake_bug">shake_bug</string>
+    <string name="screenshot_bug">screenshot_bug</string>
     <string name="login_text">Please enter your details</string>
     <string name="name_prompt">Enter your name</string>
     <string name="enter_password">Enter password</string>
