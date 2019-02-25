@@ -31,7 +31,7 @@ dependencies {
 
     implementation 'me.itangqi.waveloadingview:library:0.3.5'
     //picasso library dependencies
-    compile 'com.squareup.picasso:picasso:2.5.2'
+    implementation 'com.squareup.picasso:picasso:2.5.2'
     //UI Component : ImageView with Zooming
     implementation 'com.github.chrisbanes:PhotoView:2.1.3'
 }

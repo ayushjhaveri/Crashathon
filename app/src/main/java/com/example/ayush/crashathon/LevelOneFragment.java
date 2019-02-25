@@ -1,6 +1,7 @@
 package com.example.ayush.crashathon;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -36,8 +37,8 @@ public class LevelOneFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if(edit_pw.getText().toString().equals("1234")){
+                    startActivity(new Intent(getContext(), level_one.class));
 
-                    //Call Intent to your activity here
 
                 }
             }

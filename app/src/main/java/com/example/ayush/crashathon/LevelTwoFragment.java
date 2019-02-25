@@ -18,7 +18,7 @@ public class LevelTwoFragment extends Fragment {
 
     Button btn_login;
     EditText edit_pw;
-    SharedPreferences sharedPref;
+    SharedPreferences sharedpref;
 
     public LevelTwoFragment() {
         // Required empty public constructor
@@ -31,14 +31,14 @@ public class LevelTwoFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v =inflater.inflate(R.layout.fragment_level_two, container, false);
-
+        sharedpref = getContext().getSharedPreferences( "preferences",Context.MODE_PRIVATE);
         edit_pw = (EditText)v.findViewById(R.id.edit_pw);
         btn_login=(Button)v.findViewById(R.id.button);
         btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(edit_pw.getText().toString().equals("1234")){
-                    SharedPreferences.Editor editor=sharedPref.edit();
+                    SharedPreferences.Editor editor=sharedpref.edit();
                     editor.putBoolean(getString(R.string.log_in_key),true);
                     editor.apply();
                     startActivity(new Intent(getContext(), SunburnActivity.class));
@@ -49,9 +49,6 @@ public class LevelTwoFragment extends Fragment {
 
         return v;
     }
-
-
-
-
+    
 
 }
