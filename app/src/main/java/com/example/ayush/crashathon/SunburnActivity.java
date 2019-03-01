@@ -94,7 +94,7 @@ floatingActionButton1.setOnClickListener(new View.OnClickListener() {
         drumImage = findViewById(R.id.drum_buttons);
 
         //Get a handle to a sharedpref object
-        sharedPref=this.getPreferences(Context.MODE_PRIVATE);
+        sharedPref=getSharedPreferences("Crashathon", MODE_PRIVATE);
 
         //set the starting time
         time=readTime();
@@ -109,17 +109,13 @@ floatingActionButton1.setOnClickListener(new View.OnClickListener() {
             time-=(currentSystemTime-sharedPref.getInt(getString(R.string.system_time),currentSystemTime))/1000;
         }
 
-        //Check to see if the game has already ended
-        //if yes, then proceed to ScoreActivity autmotically, if no, then stay
-        Boolean isGameOver=sharedPref.getBoolean(getString(R.string.game_over_key),false);
-
 
 
         drumImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                sharedPref=SunburnActivity.this.getPreferences(Context.MODE_PRIVATE);
+                sharedPref=getSharedPreferences("Crashathon", MODE_PRIVATE);
                 Boolean isLocked=sharedPref.getBoolean(getString(R.string.drum_button_lock),false);
                 if(isLocked){
                     Snackbar.make(v, "You've already used this feature", Snackbar.LENGTH_LONG)
@@ -160,7 +156,7 @@ floatingActionButton1.setOnClickListener(new View.OnClickListener() {
         new Shaker(getApplicationContext(), 5.0d, 2000, new Shaker.Callback() {
             @Override
             public void shakingStarted() {
-                sharedPref=SunburnActivity.this.getPreferences(Context.MODE_PRIVATE);
+                sharedPref=getSharedPreferences("Crashathon", MODE_PRIVATE);
                 Boolean isLocked=sharedPref.getBoolean(getString(R.string.shake_bug),false);
                 if(isLocked){
                     Toast.makeText(SunburnActivity.this, "You've already used this feature", Toast.LENGTH_SHORT).show();
@@ -297,7 +293,7 @@ floatingActionButton1.setOnClickListener(new View.OnClickListener() {
                                         Log.d("shotties",path + " = path");
 
                                         //crash(), add the check if the bug has been used or not
-                                        sharedPref=SunburnActivity.this.getPreferences(Context.MODE_PRIVATE);
+                                        sharedPref=getSharedPreferences("Crashathon", MODE_PRIVATE);
                                         Boolean isLocked=sharedPref.getBoolean(getString(R.string.screenshot_bug),false);
                                         if(isLocked){
                                             Toast.makeText(SunburnActivity.this, "You've already used this feature", Toast.LENGTH_SHORT).show();
@@ -336,7 +332,7 @@ floatingActionButton1.setOnClickListener(new View.OnClickListener() {
                         mCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
                         if (year > 2001) {
                             //We begin by checking if the feature has been locked previously
-                            sharedPref=SunburnActivity.this.getPreferences(Context.MODE_PRIVATE);
+                            sharedPref=getSharedPreferences("Crashathon", MODE_PRIVATE);
                             Boolean isLocked=sharedPref.getBoolean(getString(R.string.underage_bug_lock),false);
                             if(isLocked){
                                 Snackbar.make(v, "You've already used this feature", Snackbar.LENGTH_LONG)
@@ -416,7 +412,8 @@ floatingActionButton1.setOnClickListener(new View.OnClickListener() {
                 //set the game_over sharedpref value as true and direct to the ScoreActivity
                 SharedPreferences.Editor editor=sharedPref.edit();
                 editor.putBoolean(getString(R.string.game_over_key),true);
-                editor.apply();
+                editor.putBoolean(getString(R.string.level_two_current_key), false);
+                editor.commit();
                 Intent intent=new Intent(SunburnActivity.this, Leaderboard.class);
                 startActivity(intent);
                 finish();
@@ -434,13 +431,13 @@ floatingActionButton1.setOnClickListener(new View.OnClickListener() {
 
     public int readTime(){
         String timeText=null;
-        sharedPref=this.getPreferences(Context.MODE_PRIVATE);
+        sharedPref=getSharedPreferences("Crashathon", MODE_PRIVATE);
         timeText=sharedPref.getString(getString(R.string.timer_text_key),""+60);
         return Integer.parseInt(timeText);
     }
 
     public void writeTime(){
-        sharedPref=this.getPreferences(Context.MODE_PRIVATE);
+        sharedPref=getSharedPreferences("Crashathon", MODE_PRIVATE);
         SharedPreferences.Editor editor=sharedPref.edit();
         editor.putString(getString(R.string.timer_text_key), ""+millis/1000);
         editor.apply();

@@ -68,7 +68,8 @@
             android:focusable="true"
             android:textColor="@color/greenlight"
             android:padding="10dp"
-            android:textCursorDrawable="@color/greenlight" />
+            android:textCursorDrawable="@color/greenlight"
+            android:inputType="textPersonName"/>
 
         <Button
             android:id="@+id/buttonlogin"

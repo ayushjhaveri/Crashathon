@@ -58,7 +58,7 @@ public class level_one extends AppCompatActivity {
         final EditText et5 = findViewById(R.id.et5);
         final EditText et6= findViewById(R.id.et6);
         wlvv = (WaveLoadingView) findViewById(R.id.wlv_sunburn);
-        sharedPref=this.getPreferences(Context.MODE_PRIVATE);
+        sharedPref=getSharedPreferences("Crashathon", MODE_PRIVATE);
 
         //set the starting time
         time=readTime();
@@ -361,8 +361,9 @@ public class level_one extends AppCompatActivity {
             public void onFinish() {
                 //set the game_over sharedpref value as true and direct to the ScoreActivity
                 SharedPreferences.Editor editor=sharedPref.edit();
-                editor.putBoolean("game_over_key",true);
-                editor.apply();
+                editor.putBoolean("level_one_current_key",false);
+                editor.putBoolean("level_two_login_current_key", true);
+                editor.commit();
                 Intent intent=new Intent(level_one.this, Level2login.class);
                 startActivity(intent);
             }
@@ -391,11 +392,7 @@ public class level_one extends AppCompatActivity {
         sharedPref=this.getPreferences(Context.MODE_PRIVATE);
         SharedPreferences.Editor editor=sharedPref.edit();
         editor.putString("timer_text_key", ""+millis/1000);
-        editor.apply();
+        editor.commit();
     }
-
-
-
-
 }
 
