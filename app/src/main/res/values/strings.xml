@@ -17,7 +17,11 @@
     <string name="name_prompt">Enter your name</string>
     <string name="enter_password">Enter password</string>
     <string name="timer_text_key">timer_text_key</string>
-    <string name="log_in_key">log_in_key</string>
+    <string name="start_up_key">start_up_key</string>
+    <string name="level_one_current_key">level_one_current_key</string>
+    <string name="level_two_current_key">level_two_current_key</string>
+    <string name="level_one_login_current_key">level_one_login_current_key</string>
+    <string name="level_two_login_current_key">level_two_login_current_key</string>
     <string name="game_over_key">game_over_key</string>
     <string name="interruption_key">interruption_key</string>
     <string name="system_time">system_time</string>
