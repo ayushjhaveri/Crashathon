@@ -4,14 +4,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/color"
     tools:context=".SunburnActivity">
-
+    <android.support.design.widget.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:id="@+id/instructions2"
+        android:layout_margin="10dp"
+        android:src="@drawable/ic_info_white_24dp"/>
     <me.itangqi.waveloadingview.WaveLoadingView
         android:layout_centerHorizontal="true"
         android:id="@+id/wlv_sunburn"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        app:wlv_borderColor="@color/colorAccent"
+        app:wlv_borderColor="@color/black"
         app:wlv_borderWidth="3dp"
         app:wlv_progressValue="40"
         app:wlv_shapeType="circle"
@@ -27,68 +34,92 @@
         app:wlv_titleBottomColor="@android:color/white"
         app:wlv_waveAmplitude="70"
         app:wlv_waveColor="@color/colorAccent"/>
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@id/wlv_sunburn"
+        android:gravity="center"
+        android:padding="8dp"
+        android:text="The Sunburn'19 Concert"
+        android:textAppearance="@style/TextAppearance.AppCompat"
+        android:textColor="#ffffff"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tv_des"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_title"
+        android:layout_centerInParent="true"
+        android:fontFamily="@font/abhaya_libre_medium"
+        android:text="Shake it, Flash it, Turn it up, Play the beat!"
+        android:textColor="#ffffff"
+        android:textSize="20sp"
+        android:textStyle="bold" />
 
     <ImageView
         android:id="@+id/drum_buttons"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:src="@drawable/drum"
-        android:layout_alignParentEnd="true"
-        />
+        android:layout_width="159dp"
+        android:layout_height="80dp"
+        android:layout_below="@id/tv_des"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="156dp"
+        android:layout_marginBottom="491dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/drum1" />
 
-    <TextView
-        android:layout_below="@id/wlv_sunburn"
-        android:id="@+id/tv_title"
-        android:layout_width="match_parent"
-        android:gravity="center"
-        android:text="The Sunburn'19 Concert"
-        android:textSize="30sp"
-        android:textColor="@android:color/black"
-        android:layout_height="50dp"
-        android:padding="8dp"/>
 
-    <TextView
-        android:id="@+id/tv_sub"
-        android:layout_below="@id/tv_title"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:text="Shake it, Flash it, Turn it up, Play the beat!"
-        android:textSize="18sp"
-        android:padding="6dp"
-        android:layout_marginStart="12dp"
-        android:layout_marginEnd="12dp"
-        android:gravity="center"/>
 
     <ImageView
         android:id="@+id/explicit_image"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/show_explicit_button"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="-4dp"
         android:scaleType="centerCrop"
-        android:layout_centerInParent="true"
-        android:src="@drawable/blurrohit"/>
+        android:src="@drawable/blurrohit" />
     <Button
         android:id="@+id/show_explicit_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Explicit!"
         android:layout_centerInParent="true" />
+<LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+
+    android:layout_alignParentBottom="true"
+    android:layout_centerInParent="true">
 
     <Switch
-        android:text="Dark Theme"
         android:id="@+id/switch_dark"
-        android:layout_alignParentBottom="true"
         android:layout_width="200dp"
-        android:layout_height="100dp" />
+        android:layout_height="100dp"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="10dp"
+        android:fontFamily="@font/carter_one"
+        android:text="Dark Theme"
+        android:textColor="@color/white"
+        android:textStyle="bold" />
 
     <Switch
 
-        android:text="Light Theme"
         android:id="@+id/switch_light"
-        android:layout_toRightOf="@id/switch_dark"
-        android:layout_alignParentBottom="true"
         android:layout_width="200dp"
-        android:layout_height="100dp" />
-
+        android:layout_height="100dp"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="10dp"
+        android:layout_toRightOf="@id/switch_dark"
+        android:fontFamily="@font/carter_one"
+        android:text="Light Theme"
+        android:textColor="@color/white"
+        android:textStyle="bold" />
+</LinearLayout>
 
 
 </RelativeLayout>

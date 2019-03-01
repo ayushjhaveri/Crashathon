@@ -18,6 +18,7 @@ import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.Message;
 import android.provider.MediaStore;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.ActivityOptionsCompat;
@@ -80,7 +81,13 @@ public class SunburnActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sunburn);
-
+FloatingActionButton floatingActionButton1=findViewById(R.id.instructions2);
+floatingActionButton1.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View view) {
+        startActivity(new Intent(SunburnActivity.this,Instruction2.class));
+    }
+});
         wlv = (WaveLoadingView) findViewById(R.id.wlv_sunburn);
         explicitImage = (ImageView) findViewById(R.id.explicit_image);
         showExplicitButton = (Button) findViewById(R.id.show_explicit_button);
@@ -105,10 +112,7 @@ public class SunburnActivity extends AppCompatActivity {
         //Check to see if the game has already ended
         //if yes, then proceed to ScoreActivity autmotically, if no, then stay
         Boolean isGameOver=sharedPref.getBoolean(getString(R.string.game_over_key),false);
-        if(isGameOver){
-            Intent intent=new Intent(this, MainActivity.class);
-            startActivity(intent);
-        }
+
 
 
         drumImage.setOnClickListener(new View.OnClickListener() {
@@ -413,8 +417,9 @@ public class SunburnActivity extends AppCompatActivity {
                 SharedPreferences.Editor editor=sharedPref.edit();
                 editor.putBoolean(getString(R.string.game_over_key),true);
                 editor.apply();
-                Intent intent=new Intent(SunburnActivity.this, MainActivity.class);
+                Intent intent=new Intent(SunburnActivity.this, Leaderboard.class);
                 startActivity(intent);
+                finish();
             }
         }.start();
 

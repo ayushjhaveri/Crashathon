@@ -23,7 +23,7 @@ public class Utils {
             return false;
         }
 
-        // Create a path where we will place our List of objects on external storage
+        // Create a path where we will place our Data of objects on external storage
         File file = new File(context.getExternalFilesDir(null), "ScoreData");
         PrintStream p = null; // declare a print stream object
         boolean success = false;
@@ -129,7 +129,7 @@ public class Utils {
             Log.w("FileUtils", "Storage not available or read only");
         }
 
-        // Create a path where we will place our List of objects on external storage
+        // Create a path where we will place our Data of objects on external storage
         File file = new File(context.getExternalFilesDir(null), "UserData");
         PrintStream p = null; // declare a print stream object
 
