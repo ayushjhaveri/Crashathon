@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.CountDownTimer;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -62,6 +63,13 @@ public class level_one extends AppCompatActivity {
         //set the starting time
         time=readTime();
         millis = readTime()*1000;
+        FloatingActionButton fab=findViewById(R.id.instructions);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(level_one.this,Instruction.class));
+            }
+        });
 
 
 
@@ -355,7 +363,7 @@ public class level_one extends AppCompatActivity {
                 SharedPreferences.Editor editor=sharedPref.edit();
                 editor.putBoolean("game_over_key",true);
                 editor.apply();
-                Intent intent=new Intent(level_one.this, MainActivity.class);
+                Intent intent=new Intent(level_one.this, Level2login.class);
                 startActivity(intent);
             }
         }.start();

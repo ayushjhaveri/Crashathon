@@ -1,11 +1,11 @@
 package com.example.ayush.crashathon;
 
-public class List {
+public class Data {
 private String position;
 private String nickname;
 private String score;
 
-    public List(String position, String nickname, String score) {
+    public Data(String position, String nickname, String score) {
         this.position = position;
         this.nickname = nickname;
         this.score = score;
